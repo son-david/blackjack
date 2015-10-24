@@ -14,8 +14,10 @@ class window.Game extends Backbone.Model
 
     if dealerScore >= playerScore
       console.log('dealer wins!')
+      @dealerHand.endGame()
     else
       console.log('player wins!')
+      @playerHand.endGame()
     #for i in playerScore
 
   bustCheck: (hand) ->
@@ -26,14 +28,12 @@ class window.Game extends Backbone.Model
       if score[1] > 21
         busted = true
       console.log('busted') if busted == true
+      hand.endGame() if busted == true
     #@collection.on 'add remove change', => @render()
     # if score > 21 that player busted.
     # send alert, end the game
 
   gameLogic: ->
-    # flip card
-    
-    @dealerHand.models[0].flip()
     # hit if score < 16 and return call to gameLogic
     if @highScore(@dealerHand.scores()) < 17
       @dealerHand.hit()

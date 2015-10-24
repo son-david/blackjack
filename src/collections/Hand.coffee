@@ -11,6 +11,12 @@ class window.Hand extends Backbone.Collection
     @trigger 'endTurn'
     return
 
+  flip: ->
+    @models[0].flip()
+
+  endGame: ->
+    @trigger 'endGame'
+
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
   , 0
