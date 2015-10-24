@@ -5,4 +5,9 @@ class window.App extends Backbone.Model
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
-
+    @set 'game', game = @makeGame()
+    @get 'playerHand'
+      .on 'endTurn', ->
+        @get game.gameLogic()
+    
+  makeGame: -> new Game (@get 'playerHand'), @get 'dealerHand'
